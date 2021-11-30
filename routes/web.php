@@ -4,6 +4,8 @@ use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\UserRegistration;
 use App\Http\Controllers\CookieController;
 use App\Http\Controllers\ValidationController;
+use App\Http\Controllers\CarController;
+
 use Illuminate\http\Request;
 /*
 |--------------------------------------------------------------------------
@@ -190,3 +192,7 @@ Route::post('validation', [ValidationController::class,'validateform']);
 Route::get('blade', function () {
     return view('array',['arr' => [1,2,"Anna"]]);
     });
+
+
+
+Route::get('/cars', [CarController::class, 'index']);

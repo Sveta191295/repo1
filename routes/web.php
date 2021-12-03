@@ -4,7 +4,9 @@ use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\UserRegistration;
 use App\Http\Controllers\CookieController;
 use App\Http\Controllers\ValidationController;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\ProductController;
 
 use Illuminate\http\Request;
 /*
@@ -196,3 +198,17 @@ Route::get('blade', function () {
 
 
 Route::get('/cars', [CarController::class, 'index']);
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::get('product/create', [ProductController::class,'create'])->name('product.create');
+
+
+Route::get('product/{product}', [ProductController::class,'show'])->name('product.show');
+
+
+Route::get('category/product/{product}', [ProductController::class,'removeCategory'])->name('category.product.delete');

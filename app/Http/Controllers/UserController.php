@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -11,25 +13,33 @@ class UserController extends Controller
     //     echo "This is User with ID $id";
     // }
 
-    public function __construct()
-    {
-        $this->middleware('second:1');
-    }
+//     public function __construct()
+//     {
+//         $this->middleware('second:1');
+//     }
 
 
-    public function show(Request $request,$x)
-    {
-// $params = $request->only(["param1"]);
-    echo $request->path() . "<br>";
+//     public function show(Request $request,$x)
+//     {
+// // $params = $request->only(["param1"]);
+//     echo $request->path() . "<br>";
 
-    echo $request->fullUrl() . "<br>";
+//     echo $request->fullUrl() . "<br>";
 
-    echo $request->method();
-    var_dump($request->isMethod('post'));
-    $param1 = $request->input('param1');
-    $param2 = $request->input('param2');
-    $param3 = $request->input('param13',3);
-    var_dump($param1,$param2,$param3);
-    }
+//     echo $request->method();
+//     var_dump($request->isMethod('post'));
+//     $param1 = $request->input('param1');
+//     $param2 = $request->input('param2');
+//     $param3 = $request->input('param13',3);
+//     var_dump($param1,$param2,$param3);
+//     }
+
+
+    public function show(User $user)
+        {   
+        
+            return view('user.show', compact('user'));
+        
+        }
 }
 

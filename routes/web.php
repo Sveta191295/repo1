@@ -6,8 +6,9 @@ use App\Http\Controllers\CookieController;
 use App\Http\Controllers\ValidationController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProductController;
-
+use App\Http\Controllers\UserController;
 use Illuminate\http\Request;
 /*
 |--------------------------------------------------------------------------
@@ -19,40 +20,40 @@ use Illuminate\http\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('foo', function () {
-    return 'Hello World';
-});
-    
-// Route::get('user/{id}', function ($id) {
-//     return 'User '.$id;
+// Route::get('/', function () {
+//     return view('welcome');
 // });
-Route::get('posts/{post}/comments/{comment}', 
-    function ($postId, $commentId) {
-        return $postId . " " . $commentId;
-    }
-);
-Route::get('/test', [
-    \App\Http\Controllers\TestController::class,
-    'index'
-    ])->middleware(['age', 'role:editor']);
+// Route::get('foo', function () {
+//     return 'Hello World';
+// });
     
-Route::get('/terminate', [
-\App\Http\Controllers\ABCController::class,
-'index'
-])->middleware('terminate');
-Route::get('/terminate', [
-    \App\Http\Controllers\ABCController::class,
-    'index'
-    ])->middleware('terminate');
+// // Route::get('user/{id}', function ($id) {
+// //     return 'User '.$id;
+// // });
+// Route::get('posts/{post}/comments/{comment}', 
+//     function ($postId, $commentId) {
+//         return $postId . " " . $commentId;
+//     }
+// );
+// Route::get('/test', [
+//     \App\Http\Controllers\TestController::class,
+//     'index'
+//     ])->middleware(['age', 'role:editor']);
+    
+// Route::get('/terminate', [
+// \App\Http\Controllers\ABCController::class,
+// 'index'
+// ])->middleware('terminate');
+// Route::get('/terminate', [
+//     \App\Http\Controllers\ABCController::class,
+//     'index'
+//     ])->middleware('terminate');
 
 
-Route::get('/user/{id}', [
-    \App\Http\Controllers\UserController::class,
-    'show'
-    ]);
+// Route::get('/user/{id}', [
+//     \App\Http\Controllers\UserController::class,
+//     'show'
+//     ]);
 // Route::get('/user/{id}', [
 //     \App\Http\Controllers\UserController::class,
 //     'show'
@@ -70,145 +71,153 @@ Route::get('/test', [
 //     ]);
 
 
-Route::resource('photos', PhotoController::class);
+// Route::resource('photos', PhotoController::class);
 
 
-Route::get('/user/{id}', [
-    \App\Http\Controllers\UserController::class,
-    'show'
-    ]);
+// Route::get('/user/{id}', [
+//     \App\Http\Controllers\UserController::class,
+//     'show'
+//     ]);
 
-Route::get('/register',function() {
-    return view('register');
-    });
+// Route::get('/register',function() {
+//     return view('register');
+//     });
 
-Route::post(
-    '/user/register',       
-    [UserRegistration::class,         
-    'postRegister']
-        );
-
-
-Route::get('/basic_response', function () {
-    return 'Hello World';
-    });
-
-Route::get('/array_route', function () {
-    return [1, 2, 3];
-    });
-
-Route::get('/header',function() {
-    return response("Hello", 200)
-    ->header('Content-Type', 'text/html');
-    });
+// Route::post(
+//     '/user/register',       
+//     [UserRegistration::class,         
+//     'postRegister']
+//         );
 
 
-Route::get('json',function() {
-    return response()->json([
-        'name' => 'Barack Obama', 
-        'state' => 'Illinois'
-    ]);
-});
+// Route::get('/basic_response', function () {
+//     return 'Hello World';
+//     });
+
+// Route::get('/array_route', function () {
+//     return [1, 2, 3];
+//     });
+
+// Route::get('/header',function() {
+//     return response("Hello", 200)
+//     ->header('Content-Type', 'text/html');
+//     });
 
 
-Route::get('dashboard', function () {
-    return redirect('user/1');
-    });
-
-Route::get('dashboard', function () {
-    return redirect()->route('user', ['id' => 1]);
-
- });
-
- Route::get('dashboard', function () {
-    return redirect()->away('https://www.google.com');
- });
-
- Route::get('dashboard', function () {
-    return response('Hello World')->cookie(
-        'name', 'value', 60);
-
- });
+// Route::get('json',function() {
+//     return response()->json([
+//         'name' => 'Barack Obama', 
+//         'state' => 'Illinois'
+//     ]);
+// });
 
 
+// Route::get('dashboard', function () {
+//     return redirect('user/1');
+//     });
 
- Route::get('/header',function(Request $request) {
-    $value = $request->cookie('name');
-    echo $value;
+// Route::get('dashboard', function () {
+//     return redirect()->route('user', ['id' => 1]);
 
-    });
+//  });
 
-Route::resource('photos', PhotoController::class); 
-Route::get(
-    '/cookie/set',
-    [CookieController::class,'setCookie']
-);
+//  Route::get('dashboard', function () {
+//     return redirect()->away('https://www.google.com');
+//  });
 
+//  Route::get('dashboard', function () {
+//     return response('Hello World')->cookie(
+//         'name', 'value', 60);
 
-Route::get(
-    '/cookie/get',
-    [CookieController::class,'getCookie']
-);        
-
-
-Route::post(
-    '/user/register', 
-    [UserRegistration::class, 'postRegister']
-    );
-
-
-Route::get('/greeting', function () {
-    return view('greeting', [
-    'name' => 'James'
-    ]);
-});
-
-
-Route::get('blade', function () {
-    return view('child');
-    });
-
-
-Route::get('blade', function () {
-    return view('child',['name' => 'Samantha']);
-    });
-
-    Route::get('blade', function () {
-        return view('child',['records' => [1,2,3]]);
-        });
-
-
-Route::get('session/get', [SessionController::class,
-'accessSessionData']);
-Route::get('session/set', [SessionController::class,
-    'storeSessionData']);
-Route::get('session/remove', [SessionController::class,
-    'deleteSessionData']);
-
-
-Route::get('validation', [ValidationController::class,'showform']);
-Route::post('validation', [ValidationController::class,'validateform']);
+//  });
 
 
 
-Route::get('blade', function () {
-    return view('array',['arr' => [1,2,"Anna"]]);
-    });
+//  Route::get('/header',function(Request $request) {
+//     $value = $request->cookie('name');
+//     echo $value;
+
+//     });
+
+// Route::resource('photos', PhotoController::class); 
+// Route::get(
+//     '/cookie/set',
+//     [CookieController::class,'setCookie']
+// );
+
+
+// Route::get(
+//     '/cookie/get',
+//     [CookieController::class,'getCookie']
+// );        
+
+
+// Route::post(
+//     '/user/register', 
+//     [UserRegistration::class, 'postRegister']
+//     );
+
+
+// Route::get('/greeting', function () {
+//     return view('greeting', [
+//     'name' => 'James'
+//     ]);
+// });
+
+
+// Route::get('blade', function () {
+//     return view('child');
+//     });
+
+
+// Route::get('blade', function () {
+//     return view('child',['name' => 'Samantha']);
+//     });
+
+//     Route::get('blade', function () {
+//         return view('child',['records' => [1,2,3]]);
+//         });
+
+
+// Route::get('session/get', [SessionController::class,
+// 'accessSessionData']);
+// Route::get('session/set', [SessionController::class,
+//     'storeSessionData']);
+// Route::get('session/remove', [SessionController::class,
+//     'deleteSessionData']);
+
+
+// Route::get('validation', [ValidationController::class,'showform']);
+// Route::post('validation', [ValidationController::class,'validateform']);
 
 
 
-Route::get('/cars', [CarController::class, 'index']);
+// Route::get('blade', function () {
+//     return view('array',['arr' => [1,2,"Anna"]]);
+//     });
 
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-Route::get('product/create', [ProductController::class,'create'])->name('product.create');
+// Route::get('/cars', [CarController::class, 'index']);
 
 
-Route::get('product/{product}', [ProductController::class,'show'])->name('product.show');
+// Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::get('category/product/{product}', [ProductController::class,'removeCategory'])->name('category.product.delete');
+// Route::get('product/create', [ProductController::class,'create'])->name('product.create');
+
+
+// Route::get('product/{product}', [ProductController::class,'show'])->name('product.show');
+
+
+// Route::get('category/product/{product}', [ProductController::class,'removeCategory'])->name('category.product.delete');
+
+Route::get('user/{id}',[UserController::class,'show'])->name('user.show');
+
+
+Route::get('company/{id}',[CompanyController::class,'show'])->name('company.show');
+
+
+Route::get('/abc', [\App\Http\Controllers\ABCController::class, 'index']);

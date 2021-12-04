@@ -25,7 +25,10 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {   
-        return view('product.show', compact('product'));
+        // return view('product.show', compact('product'));
+        return view('product.show', ['product' => $product]);
+
+       
     }
 
     public function removeCategory(Product $product)
@@ -33,6 +36,8 @@ class ProductController extends Controller
         $category = Category::find(3);
 
         $product->categories()->detach($category);
+
+
         
         return 'Success';
     }

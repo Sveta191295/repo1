@@ -4,6 +4,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Flight;
+use App\Models\Company;
+use App\Models\Order;
+use App\Models\User;
+
 class ABCController extends Controller
 {
     public function index() {
@@ -157,35 +161,58 @@ class ABCController extends Controller
             // ->get();
 
 
-            $flight = Flight::first();
-            $flight->number = 'FR 456';
-            $flight->refresh();
+            // $flight = Flight::first();
+            // $flight->number = 'FR 456';
+            // $flight->refresh();
 
 
 
-            $flights = Flight::find(1);
+            // $flights = Flight::find(1);
 
             // echo $flights. "<br>";
 
-            foreach ($flights as $flight) {
-                echo $flight->name . "<br>";
-            }
+            // foreach ($flights as $flight) {
+            //     echo $flight->name . "<br>";
+            // }
 
 
-            $flights = new Flight();
-            $flight->name = "aaaa";
-            $flight->save();
+            // $flights = new Flight();
+            // $flight->name = "aaaa";
+            // $flight->save();
 
 
 
             
-            $user = Auth::user();
-            echo $user->name;
+            // $user = Auth::user();
+            // echo $user->name;
+
+    
+
+
+            // $account = User::find(5)->account;
+            // dd($account->toArray());
+
+
+            // $user = Order::find(3)->user;
+            // dd($user->toArray());
 
 
 
+       
+    
+
+        
+            // $user = Company::find(1)->user;
+            // dd($user->toArray());
+            
+            // $user = App\Models\Company::find(3)->user;
 
 
+            $user = Company::find(3)->user;
+            dd($user->toArray());
+            
 
+            $users = User::find(8);
+            dd($users->toArray());
         }
 }

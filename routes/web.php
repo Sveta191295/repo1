@@ -9,6 +9,7 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FileUpload;
 use Illuminate\http\Request;
 /*
 |--------------------------------------------------------------------------
@@ -221,3 +222,10 @@ Route::get('company/{id}',[CompanyController::class,'show'])->name('company.show
 
 
 Route::get('/abc', [\App\Http\Controllers\ABCController::class, 'index']);
+
+
+Route::get('/upload-file', [FileUpload::class, 'createForm']);
+
+Route::post('/upload-file', [FileUpload::class, 'fileUpload'])->name('fileUpload');
+
+Route::get('/storage',[FileUpload::class,'fileName']);

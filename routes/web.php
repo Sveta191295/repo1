@@ -10,6 +10,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FileUpload;
+use App\Http\Controllers\ImageUploadController;
 use Illuminate\http\Request;
 /*
 |--------------------------------------------------------------------------
@@ -228,4 +229,7 @@ Route::get('/upload-file', [FileUpload::class, 'createForm']);
 
 Route::post('/upload-file', [FileUpload::class, 'fileUpload'])->name('fileUpload');
 
-Route::get('/storage',[FileUpload::class,'fileName']);
+
+
+Route::get('image-upload', [ImageUploadController::class, 'createForm' ]);
+Route::post('image-upload', [ImageUploadController::class, 'imageUpload' ])->name('imageUpload');

@@ -8,9 +8,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FileUpload;
 use App\Http\Controllers\ImageUploadController;
+use App\Http\Controllers\HomeController;
 use Illuminate\http\Request;
 /*
 |--------------------------------------------------------------------------
@@ -203,9 +205,9 @@ Route::get('/test', [
 // Route::get('/cars', [CarController::class, 'index']);
 
 
-// Auth::routes();
+Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 // Route::get('product/create', [ProductController::class,'create'])->name('product.create');
@@ -233,3 +235,7 @@ Route::post('/upload-file', [FileUpload::class, 'fileUpload'])->name('fileUpload
 
 Route::get('image-upload', [ImageUploadController::class, 'createForm' ]);
 Route::post('image-upload', [ImageUploadController::class, 'imageUpload' ])->name('imageUpload');
+
+
+Route::resource('products', ProductController::class);
+Route::resource('categories', CategoryController::class);
